@@ -24,13 +24,11 @@ datos = (struct tanque*)malloc(sizeof(struct tanque)); //tamaño para una estruct
   printf("SECTOR DEL TANQUE: ");
   scanf("%s", sector_temporal);
   strcpy(datos->sector, sector_temporal);
-  printf("%s",datos->sector);
   printf("\n");
   
   printf("NOMBRE DEL TANQUE: ");
   scanf("%s", nombre_temporal);
   strcpy(datos->nombretanque, nombre_temporal);
-  printf("%s",datos->nombretanque);
   printf("\n");
   
   do
@@ -39,7 +37,6 @@ datos = (struct tanque*)malloc(sizeof(struct tanque)); //tamaño para una estruct
         scanf("%d", &datos->nivel);
     }
   while (datos->nivel < 1  || datos->nivel > 100);
-  printf("%d\n",datos->nivel);
 
 opcion=1;
 	while (opcion!=4)
@@ -80,18 +77,15 @@ char sector_temporal[100];
 char nombre_temporal[100];
 
 cantidad_datos++;
-printf("%d\n",cantidad_datos);
 *datos = (struct tanque*)realloc(*datos,(cantidad_datos+1)*sizeof(struct tanque)); //correccion con realloc
  printf("SECTOR DEL TANQUE: ");
   scanf("%s", sector_temporal);
   strcpy((*datos+cantidad_datos)->sector, sector_temporal); //usamos *datos
-  printf("%s",(*datos+cantidad_datos)->sector);
   printf("\n");
   
   printf("NOMBRE DEL TANQUE: ");
   scanf("%s", nombre_temporal);
   strcpy((*datos+cantidad_datos)->nombretanque, nombre_temporal);
-  printf("%s",(*datos+cantidad_datos)->nombretanque);
   printf("\n");
   
   do
@@ -100,7 +94,6 @@ printf("%d\n",cantidad_datos);
         scanf("%d", &(*datos+cantidad_datos)->nivel);
     }
   while ((*datos+cantidad_datos)->nivel < 1 || (*datos+cantidad_datos)->nivel > 100); //aqui
-  printf("%d",(*datos+cantidad_datos)->nivel); // corregir condicion
 
 
 
@@ -111,11 +104,11 @@ void mostrar_todos(struct tanque *datos, int &cantidad_datos)
 int i;
 	for (i=0;i<=cantidad_datos;i++)
 	{
-		printf("MEDIDA NUMERO: %d\n",i+1);
+		printf("\nMEDIDA NUMERO: %d\n",i+1);
 		printf("SECTOR: %s\n",(datos+i)->sector);
 		printf("NOMBRE: %s\n",(datos+i)->nombretanque);
 		printf("NIVEL: %d\n", (datos+i)->nivel);
-		printf("\n\n");
+		printf("\n");
 	}
 }
 
