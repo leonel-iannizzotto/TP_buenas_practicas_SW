@@ -21,6 +21,13 @@ int cantidad_datos=0;
 struct tanque *datos;
 
 datos = (struct tanque*)malloc(sizeof(struct tanque)); //tamaño para una estructura como tanque
+
+if (datos == NULL) 
+{
+	printf("Error\n"); //agregamos validacion 
+	return 1;
+} 
+ 
   printf("SECTOR DEL TANQUE: ");
   scanf("%s", sector_temporal);
   strcpy(datos->sector, sector_temporal);
@@ -69,6 +76,7 @@ opcion=1;
 		}
 	}
 	free(datos);
+	datos = NULL; 
 }
 
 void cargar_datos(struct tanque **datos, int &cantidad_datos) // cambio doble puntero
@@ -78,22 +86,29 @@ char nombre_temporal[100];
 
 cantidad_datos++;
 *datos = (struct tanque*)realloc(*datos,(cantidad_datos+1)*sizeof(struct tanque)); //correccion con realloc
- printf("SECTOR DEL TANQUE: ");
-  scanf("%s", sector_temporal);
-  strcpy((*datos+cantidad_datos)->sector, sector_temporal); //usamos *datos
-  printf("\n");
+
+if (*datos == NULL) 
+{
+	printf("Error\n"); //agregamos validacion 
+	exit(1);
+} 
+
+	printf("SECTOR DEL TANQUE: ");
+	scanf("%s", sector_temporal);
+	strcpy((*datos+cantidad_datos)->sector, sector_temporal); //usamos *datos
+	printf("\n");
+	
+	printf("NOMBRE DEL TANQUE: ");
+	scanf("%s", nombre_temporal);
+	strcpy((*datos+cantidad_datos)->nombretanque, nombre_temporal);
+	printf("\n");
   
-  printf("NOMBRE DEL TANQUE: ");
-  scanf("%s", nombre_temporal);
-  strcpy((*datos+cantidad_datos)->nombretanque, nombre_temporal);
-  printf("\n");
-  
-  do
+	do
     {
         printf("NIVEL(1 a 100): ");
         scanf("%d", &(*datos+cantidad_datos)->nivel);
     }
-  while ((*datos+cantidad_datos)->nivel < 1 || (*datos+cantidad_datos)->nivel > 100); //aqui
+	while ((*datos+cantidad_datos)->nivel < 1 || (*datos+cantidad_datos)->nivel > 100); //aqui
 
 
 
